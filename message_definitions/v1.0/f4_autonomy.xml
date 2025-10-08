@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!-- FoxFour Autonomy MAVLink dialect -->
+<!-- Message ID range: 62708 - 63000 -->
+
+<mavlink>
+  <include>common.xml</include>
+  <version>2</version>
+  <dialect>1</dialect>
+  <enums>
+    <enum name="F4_AUTONOMY_DETECTION_CLASS">
+      <description>Classification for detected objects.</description>
+      <entry value="0" name="F4_AUTONOMY_DETECTION_CLASS_PERSON">
+        <description>Person detected.</description>
+      </entry>
+      <entry value="1" name="F4_AUTONOMY_DETECTION_CLASS_CAR">
+        <description>Car detected.</description>
+      </entry>
+      <entry value="2" name="F4_AUTONOMY_DETECTION_CLASS_ARMORED_VEHICLE">
+        <description>Armored vehicle detected.</description>
+      </entry>
+      <entry value="3" name="F4_AUTONOMY_DETECTION_CLASS_PLANE">
+        <description>Plane detected.</description>
+      </entry>
+      <entry value="4" name="F4_AUTONOMY_DETECTION_CLASS_DRONE">
+        <description>Drone detected.</description>
+      </entry>
+    </enum>
+  </enums>
+  <messages>
+    <message id="62708" name="F4_TRACKING">
+      <description>Tracking state for a tracked object.</description>
+      <field type="uint32_t" name="id">Unique tracking identifier.</field>
+      <field type="float" name="x">Normalized center X coordinate.</field>
+      <field type="float" name="y">Normalized center Y coordinate.</field>
+      <field type="float" name="w">Normalized width.</field>
+      <field type="float" name="h">Normalized height.</field>
+      <field type="uint32_t" name="timestamp_high">High 32 bits of capture timestamp.</field>
+      <field type="uint32_t" name="timestamp_low">Low 32 bits of capture timestamp.</field>
+    </message>
+    <message id="62709" name="F4_DETECTOR">
+      <description>Detection data from an onboard detector.</description>
+      <field type="uint32_t" name="id">Unique detection identifier.</field>
+      <field type="uint8_t" name="class_type" enum="F4_AUTONOMY_DETECTION_CLASS">Object classification.</field>
+      <field type="int32_t" name="latitude" units="degE7" invalid="INT32_MAX">Latitude (WGS84) of the POI. If unknown: INT32_MAX (both Lat/Lon).</field>
+      <field type="int32_t" name="longitude" units="degE7" invalid="INT32_MAX">Longitude (WGS84) of the POI. If unknown: INT32_MAX (both Lat/Lon).</field>
+      <field type="float" name="dist" units="m" invalid="NaN">Distance from the aircraft sensor/camera focal point to the POI. NAN if unknown.</field>
+      <field type="float" name="vel_n" units="m/s" invalid="NaN">North velocity of the POI. NAN if unknown.</field>
+      <field type="float" name="vel_e" units="m/s" invalid="NaN">East velocity of the POI. NAN if unknown.</field>
+      <field type="float" name="vel_d" units="m/s" invalid="NaN">Down velocity of the POI. NAN if unknown.</field>
+      <field type="float" name="x">Normalized center X coordinate.</field>
+      <field type="float" name="y">Normalized center Y coordinate.</field>
+      <field type="float" name="w">Normalized width.</field>
+      <field type="float" name="h">Normalized height.</field>
+    </message>
+  </messages>
+</mavlink>
