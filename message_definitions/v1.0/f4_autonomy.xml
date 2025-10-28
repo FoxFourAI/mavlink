@@ -6,41 +6,104 @@
   <include>common.xml</include>
   <version>2</version>
   <dialect>1</dialect>
-  <enums>
-    <enum name="F4_AUTONOMY_DETECTION_CLASS">
-      <description>Classification for detected objects.</description>
-      <entry value="0" name="F4_AUTONOMY_DETECTION_CLASS_PERSON">
-        <description>Person detected.</description>
+  <enum name="MAV_COMPONENT">
+      <entry value="39" name="MAV_COMP_ID_VGM">
+          <description>Visual-Guidance Module</description>
       </entry>
+  </enum>
+  <enums>
+    <enum name="MAV_COMPANION_CAPABILITY" bitmask="true">
+      <description>Capabilities of companion computer.</description>
+      <entry value="1" name="MAV_COMPANION_CAPABILITY_DETECTION">
+        <description>Target detection.</description>
+      </entry>
+      <entry value="2" name="MAV_COMPANION_CAPABILITY_TRACKING">
+        <description>Target tracking.</description>
+      </entry>
+      <entry value="4" name="MAV_COMPANION_CAPABILITY_VIO">
+        <description>Visual-Inertial Odometry.</description>
+      </entry>
+      <entry value="8" name="MAV_COMPANION_CAPABILITY_OBSTACLE_AVOIDANCE">
+        <description>Obstacle Avoidance.</description>
+      </entry>
+    </enum>
+    <enum name="F4_AUTONOMY_DETECTION_CLASS" bitmask="true">
+      <description>Classification for detected objects.</description>
       <entry value="1" name="F4_AUTONOMY_DETECTION_CLASS_CAR">
         <description>Car detected.</description>
       </entry>
-      <entry value="2" name="F4_AUTONOMY_DETECTION_CLASS_ARMORED_VEHICLE">
-        <description>Armored vehicle detected.</description>
-      </entry>
-      <entry value="3" name="F4_AUTONOMY_DETECTION_CLASS_PLANE">
+      <entry value="2" name="F4_AUTONOMY_DETECTION_CLASS_PLANE">
         <description>Plane detected.</description>
       </entry>
-      <entry value="4" name="F4_AUTONOMY_DETECTION_CLASS_DRONE">
+      <entry value="4" name="F4_AUTONOMY_DETECTION_CLASS_ARMORED_VEHICLE">
+        <description>Armored vehicle detected.</description>
+      </entry>
+      <entry value="8" name="F4_AUTONOMY_DETECTION_CLASS_PERSON">
+        <description>Person detected.</description>
+      </entry>
+      <entry value="16" name="F4_AUTONOMY_DETECTION_CLASS_DRONE">
         <description>Drone detected.</description>
       </entry>
     </enum>
+    <enum name="F4_VIO_SRC_YAW">
+      <description>Yaw src for VIO Initialization</description>
+      <entry value="0" name="F4_VIO_SRC_YAW_COMPASS">
+        <description>Compass.</description>
+      </entry>
+      <entry value="1" name="F4_VIO_SRC_YAW_GPS">
+        <description>GPS.</description>
+      </entry>
+      <entry value="2" name="F4_VIO_SRC_YAW_NOISY_GPS">
+        <description>GPS with big pos err more than 50m.</description>
+      </entry>
+    </enum>
+    <enum name="F4_VIO_SRC_POS">
+      <description>Global position src for VIO Initialization</description>
+      <entry value="0" name="F4_VIO_SRC_POS_GPS">
+        <description>GPS.</description>
+      </entry>
+      <entry value="1" name="F4_VIO_SRC_POS_OVERWRITE">
+        <description>Lat/Lon should be passed as extra parameters.</description>
+      </entry>
+    </enum>
+    <enum name="F4_MISSN_GUID_TYPE">
+      <description>Types of Mission supported by VGM navigation controller</description>
+      <entry value="0" name="F4_MISSN_GUID_TYPE_HOVER">
+        <description>Hover.</description>
+      </entry>
+      <entry value="1" name="F4_MISSN_GUID_TYPE_TERMINAL">
+        <description>Hover.</description>
+      </entry>
+      <entry value="3" name="F4_MISSN_GUID_TYPE_TUNING">
+        <description>Hover.</description>
+      </entry>
+      <entry value="4" name="F4_MISSN_GUID_TYPE_CRUISE">
+        <description>Hover.</description>
+      </entry>
+    </enum>
   </enums>
+
   <messages>
-    <message id="62708" name="F4_TRACKING">
-      <description>Tracking state for a tracked object.</description>
-      <field type="uint32_t" name="id">Unique tracking identifier.</field>
-      <field type="float" name="x">Normalized center X coordinate.</field>
-      <field type="float" name="y">Normalized center Y coordinate.</field>
-      <field type="float" name="w">Normalized width.</field>
-      <field type="float" name="h">Normalized height.</field>
-      <field type="uint32_t" name="timestamp_high">High 32 bits of capture timestamp.</field>
-      <field type="uint32_t" name="timestamp_low">Low 32 bits of capture timestamp.</field>
+    <message id="62952" name="COMPANION_VERSION">
+      <description>Version and capability of companion software. This should be emitted in response to a request with MAV_CMD_REQUEST_MESSAGE.</description>
+      <field type="uint64_t" name="capabilities" enum="MAV_COMPANION_CAPABILITY">Bitmap of capabilities</field>
+      <field type="uint32_t" name="flight_sw_version">Firmware version number.
+        The field must be encoded as 4 bytes, where each byte (shown from MSB to LSB) is part of a semantic version: (major) (minor) (patch) (FIRMWARE_VERSION_TYPE).
+      </field>
+      <field type="uint32_t" name="middleware_sw_version">Middleware version number.</field>
+      <field type="uint32_t" name="os_sw_version">Operating system version number.</field>
+      <field type="uint32_t" name="board_version">HW / board version.</field>
+      <field type="uint8_t[8]" name="flight_custom_version">Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but should allow to identify the commit using the main version number even for very large code bases.</field>
+      <field type="uint8_t[8]" name="middleware_custom_version">Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but should allow to identify the commit using the main version number even for very large code bases.</field>
+      <field type="uint8_t[8]" name="os_custom_version">Custom version field, commonly the first 8 bytes of the git hash. This is not an unique identifier, but should allow to identify the commit using the main version number even for very large code bases.</field>
+      <field type="uint16_t" name="vendor_id">ID of the board vendor</field>
+      <field type="uint16_t" name="product_id">ID of the product</field>
+      <field type="uint64_t" name="uid">UID if provided by hardware (see uid2)</field>
     </message>
-    <message id="62709" name="F4_DETECTOR">
+    <message id="62953" name="F4_DETECTOR">
       <description>Detection data from an onboard detector.</description>
       <field type="uint32_t" name="id">Unique detection identifier.</field>
-      <field type="uint8_t" name="class_type" enum="F4_AUTONOMY_DETECTION_CLASS">Object classification.</field>
+      <field type="uint64_t" name="class_type" enum="F4_AUTONOMY_DETECTION_CLASS">Object classification.</field>
       <field type="int32_t" name="latitude" units="degE7" invalid="INT32_MAX">Latitude (WGS84) of the POI. If unknown: INT32_MAX (both Lat/Lon).</field>
       <field type="int32_t" name="longitude" units="degE7" invalid="INT32_MAX">Longitude (WGS84) of the POI. If unknown: INT32_MAX (both Lat/Lon).</field>
       <field type="float" name="dist" units="m" invalid="NaN">Distance from the aircraft sensor/camera focal point to the POI. NAN if unknown.</field>
@@ -53,4 +116,66 @@
       <field type="float" name="h">Normalized height.</field>
     </message>
   </messages>
+
+  <enum name="MAV_CMD">
+    <entry id="62708" name="MAV_CMD_START_TRACKING_F4">
+      <description>Start tracking object</description>
+      <param index="1" label="x">Normalized center X coordinate.</param>
+      <param index="2" label="y">Normalized center Y coordinate.</param>
+      <param index="3" label="w">Normalized width.</param>
+      <param index="4" label="h">Normalized height.</param>
+      <param index="5" label="timestamp_low">Low 32 bits of capture timestamp.</param>
+      <param index="6" label="timestamp_high">High 32 bits of capture timestamp.</param>
+    </entry>
+
+    <entry id="62709" name="MAV_CMD_DO_VIO_CONTROL">
+      <description>Change Visual-Inertial Navigation</description>
+      <param index="1" label="Enable">Turn on/off</param>
+      <param index="2" label="SRC_YAW" enum="F4_VIO_SRC_YAW" default="F4_VIO_SRC_YAW_COMPASS">Sensor for yaw initialization</param>
+      <param index="3" label="SRC_POS" enum="F4_VIO_SRC_POS" default="F4_VIO_SRC_POS_GPS">Sensor for yaw initialization</param>
+      <param index="4" label="SRC_POS_LAT" default="0.0">Latitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
+      <param index="5" label="SRC_POS_LON" default="0.0">Longitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
+      <param index="6">Empty</param>
+      <param index="7">Empty</param>
+    </entry>
+
+    <entry id="62710" name="MAV_CMD_DO_DETECTOR_CONTROL">
+      <description>Change Detector configuration</description>
+      <param index="1" label="Enable">Turn on/off</param>
+      <param index="2" label="Detector classes">Bitmask to chose detection classes (unsupported)</param>
+      <param index="3">Empty</param>
+      <param index="4">Empty</param>
+      <param index="5">Empty</param>
+      <param index="6">Empty</param>
+      <param index="7">Empty</param>
+    </entry>
+
+    <entry id="62711" name="MAV_CMD_IGNORE_DETECTOR_TIME">
+      <description>Ignore detections for a certain amount of time.</description>
+      <param index="1" label="Time">Ignore time</param>
+      <param index="2">Empty</param>
+      <param index="3">Empty</param>
+      <param index="4">Empty</param>
+      <param index="5">Empty</param>
+      <param index="6">Empty</param>
+      <param index="7">Empty</param>
+    </entry>
+
+    <entry id="62712" name="MAV_CMD_IGNORE_DETECTOR_REGION">
+      <description>Ignore detections in specified region. (unsupported)</description>
+      <param index="1" label="lat">Latitude.</param>
+      <param index="2" label="lon">Longitude.</param>
+      <param index="3" label="radius">Ignore radius</param>
+      <param index="4">Empty</param>
+      <param index="5">Empty</param>
+      <param index="6">Empty</param>
+      <param index="7">Empty</param>
+    </entry>
+
+    <entry id="62713" name="MAV_CMD_DO_F4NAV_CONTROL">
+      <param index="1" label="Enable">Turn on/off</param>
+      <param index="2" label="Mission Guidance Type" enum="F4_MISSN_GUID_TYPE" defaul="F4_MISSN_GUID_TYPE_TERMINAL">The type of mission to perform</param>
+    </entry>
+
+  </enum>
 </mavlink>
