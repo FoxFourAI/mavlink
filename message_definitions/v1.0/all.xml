@@ -83,9 +83,9 @@
       </entry>
     </enum>
   </enums>
-  <include>f4_autonomy.xml</include>
   <!-- FoxFour Autonomy MAVLink dialect -->
   <!-- Message ID range: 62708 - 63000 -->
+  <include>f4_autonomy.xml</include>
 
   <messages/>
 </mavlink>
