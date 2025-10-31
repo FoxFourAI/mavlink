@@ -6,12 +6,12 @@
   <include>common.xml</include>
   <version>2</version>
   <dialect>1</dialect>
-  <enum name="MAV_COMPONENT">
-      <entry value="39" name="MAV_COMP_ID_VGM">
-          <description>Visual-Guidance Module</description>
-      </entry>
-  </enum>
   <enums>
+    <enum name="MAV_COMPONENT">
+      <entry value="254" name="MAV_COMP_ID_VGM">
+        <description>Visual-Guidance Module</description>
+      </entry>
+    </enum>
     <enum name="MAV_COMPANION_CAPABILITY" bitmask="true">
       <description>Capabilities of companion computer.</description>
       <entry value="1" name="MAV_COMPANION_CAPABILITY_DETECTION">
@@ -81,6 +81,74 @@
         <description>Hover.</description>
       </entry>
     </enum>
+    <enum name="MAV_CMD">
+      <entry value="62708" name="MAV_CMD_START_TRACKING_F4" hasLocation="false" isDestination="false">
+        <description>Start tracking object</description>
+        <param index="1" label="x">Normalized center X coordinate.</param>
+        <param index="2" label="y">Normalized center Y coordinate.</param>
+        <param index="3" label="w">Normalized width.</param>
+        <param index="4" label="h">Normalized height.</param>
+        <param index="5" label="timestamp_low">Low 32 bits of capture timestamp.</param>
+        <param index="6" label="timestamp_high">High 32 bits of capture timestamp.</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62709" name="MAV_CMD_DO_VIO_CONTROL" hasLocation="false" isDestination="false">
+        <description>Change Visual-Inertial Navigation</description>
+        <param index="1" label="Enable">Turn on/off</param>
+        <param index="2" label="SRC_YAW" enum="F4_VIO_SRC_YAW">Sensor for yaw initialization</param>
+        <param index="3" label="SRC_POS" enum="F4_VIO_SRC_POS">Sensor for position initialization</param>
+        <param index="4" label="SRC_POS_LAT">Latitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
+        <param index="5" label="SRC_POS_LON">Longitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62710" name="MAV_CMD_DO_DETECTOR_CONTROL" hasLocation="false" isDestination="false">
+        <description>Change Detector configuration</description>
+        <param index="1" label="Enable">Turn on/off</param>
+        <param index="2" label="Detector classes">Bitmask to chose detection classes (unsupported)</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62711" name="MAV_CMD_IGNORE_DETECTOR_TIME" hasLocation="false" isDestination="false">
+        <description>Ignore detections for a certain amount of time.</description>
+        <param index="1" label="Time">Ignore time</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62712" name="MAV_CMD_IGNORE_DETECTOR_REGION" hasLocation="false" isDestination="false">
+        <description>Ignore detections in specified region. (unsupported)</description>
+        <param index="1" label="lat">Latitude.</param>
+        <param index="2" label="lon">Longitude.</param>
+        <param index="3" label="radius">Ignore radius</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62713" name="MAV_CMD_DO_F4NAV_CONTROL" hasLocation="false" isDestination="false">
+        <description>Control F4 Navigation</description>
+        <param index="1" label="Enable">Turn on/off</param>
+        <param index="2" label="Mission Guidance Type" enum="F4_MISSN_GUID_TYPE">The type of mission to perform</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+    </enum>
   </enums>
 
   <messages>
@@ -116,66 +184,5 @@
       <field type="float" name="h">Normalized height.</field>
     </message>
   </messages>
-
-  <enum name="MAV_CMD">
-    <entry id="62708" name="MAV_CMD_START_TRACKING_F4">
-      <description>Start tracking object</description>
-      <param index="1" label="x">Normalized center X coordinate.</param>
-      <param index="2" label="y">Normalized center Y coordinate.</param>
-      <param index="3" label="w">Normalized width.</param>
-      <param index="4" label="h">Normalized height.</param>
-      <param index="5" label="timestamp_low">Low 32 bits of capture timestamp.</param>
-      <param index="6" label="timestamp_high">High 32 bits of capture timestamp.</param>
-    </entry>
-
-    <entry id="62709" name="MAV_CMD_DO_VIO_CONTROL">
-      <description>Change Visual-Inertial Navigation</description>
-      <param index="1" label="Enable">Turn on/off</param>
-      <param index="2" label="SRC_YAW" enum="F4_VIO_SRC_YAW" default="F4_VIO_SRC_YAW_COMPASS">Sensor for yaw initialization</param>
-      <param index="3" label="SRC_POS" enum="F4_VIO_SRC_POS" default="F4_VIO_SRC_POS_GPS">Sensor for yaw initialization</param>
-      <param index="4" label="SRC_POS_LAT" default="0.0">Latitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
-      <param index="5" label="SRC_POS_LON" default="0.0">Longitude position if SRC_POS is F4_VIO_SRC_POS_OVERWRITE</param>
-      <param index="6">Empty</param>
-      <param index="7">Empty</param>
-    </entry>
-
-    <entry id="62710" name="MAV_CMD_DO_DETECTOR_CONTROL">
-      <description>Change Detector configuration</description>
-      <param index="1" label="Enable">Turn on/off</param>
-      <param index="2" label="Detector classes">Bitmask to chose detection classes (unsupported)</param>
-      <param index="3">Empty</param>
-      <param index="4">Empty</param>
-      <param index="5">Empty</param>
-      <param index="6">Empty</param>
-      <param index="7">Empty</param>
-    </entry>
-
-    <entry id="62711" name="MAV_CMD_IGNORE_DETECTOR_TIME">
-      <description>Ignore detections for a certain amount of time.</description>
-      <param index="1" label="Time">Ignore time</param>
-      <param index="2">Empty</param>
-      <param index="3">Empty</param>
-      <param index="4">Empty</param>
-      <param index="5">Empty</param>
-      <param index="6">Empty</param>
-      <param index="7">Empty</param>
-    </entry>
-
-    <entry id="62712" name="MAV_CMD_IGNORE_DETECTOR_REGION">
-      <description>Ignore detections in specified region. (unsupported)</description>
-      <param index="1" label="lat">Latitude.</param>
-      <param index="2" label="lon">Longitude.</param>
-      <param index="3" label="radius">Ignore radius</param>
-      <param index="4">Empty</param>
-      <param index="5">Empty</param>
-      <param index="6">Empty</param>
-      <param index="7">Empty</param>
-    </entry>
-
-    <entry id="62713" name="MAV_CMD_DO_F4NAV_CONTROL">
-      <param index="1" label="Enable">Turn on/off</param>
-      <param index="2" label="Mission Guidance Type" enum="F4_MISSN_GUID_TYPE" defaul="F4_MISSN_GUID_TYPE_TERMINAL">The type of mission to perform</param>
-    </entry>
-
-  </enum>
 </mavlink>
+
