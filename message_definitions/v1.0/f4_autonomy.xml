@@ -81,6 +81,18 @@
         <description>Hover.</description>
       </entry>
     </enum>
+    <enum name="F4_OP_MODE">
+      <description>Types of Operation Modes supported by VGM</description>
+      <entry value="0" name="F4_OP_MODE_NAVIGATION">
+        <description>Navigation mode. Detection and tracking is disabled. Higher accuracy of localization.</description>
+      </entry>
+      <entry value="1" name="F4_OP_MODE_ASSISTANT">
+        <description>Assistant mode. Detection enabled, expects trigger from pilot.</description>
+      </entry>
+      <entry value="1" name="F4_OP_MODE_HUNT">
+        <description>Hunt mode. Detection enabled, auto-triggers F4NAV_CONTROL on controller.</description>
+      </entry>
+    </enum>
     <enum name="MAV_CMD">
       <entry value="62708" name="MAV_CMD_START_TRACKING_F4" hasLocation="false" isDestination="false">
         <description>Start tracking object</description>
@@ -141,6 +153,17 @@
         <description>Control F4 Navigation</description>
         <param index="1" label="Enable">Turn on/off</param>
         <param index="2" label="Mission Guidance Type" enum="F4_MISSN_GUID_TYPE">The type of mission to perform</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+
+      <entry value="62714" name="MAV_CMD_DO_VGM_OPMODE_CONTROL" hasLocation="false" isDestination="false">
+        <description>Control VGM Operation Mode</description>
+        <param index="1" label="Operation Mode" enum="F4_OP_MODE">The type of VGM operation mode</param>
+        <param index="2">Empty</param>
         <param index="3">Empty</param>
         <param index="4">Empty</param>
         <param index="5">Empty</param>
