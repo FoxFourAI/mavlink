@@ -119,7 +119,7 @@
       <entry value="62710" name="MAV_CMD_DO_DETECTOR_CONTROL" hasLocation="false" isDestination="false">
         <description>Change Detector configuration</description>
         <param index="1" label="Enable">Turn on/off</param>
-        <param index="2" label="Detector classes" enum="F4_AUTONOMY_DETECTION_CLASS" display="bitmask">Bitmask to chose detection classes (unsupported)</param>
+        <param index="2" label="Detector classes" enum="F4_AUTONOMY_DETECTION_CLASS">Bitmask to chose detection classes (unsupported)</param>
         <param index="3">Empty</param>
         <param index="4">Empty</param>
         <param index="5">Empty</param>
