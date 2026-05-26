@@ -170,6 +170,7 @@
         <param index="6">Empty</param>
         <param index="7">Empty</param>
       </entry>
+
     </enum>
   </enums>
 
@@ -212,7 +213,7 @@
       <field type="float" name="width">Normalized width of the region</field>
       <field type="float" name="height">Normalized height of the region</field>
       <field type="uint64_t" name="timestamp">Timestamp</field>
-  </messages>
+    </message>
   </messages>
 </mavlink>
 
