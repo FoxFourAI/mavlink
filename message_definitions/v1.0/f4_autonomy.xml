@@ -217,6 +217,14 @@
       <field type="float" name="w">Normalized width.</field>
       <field type="float" name="h">Normalized height.</field>
     </message>
+    <message id="62954" name="ZOOM_TO_REGION">
+      <description>Message to indicate region to zoom to on ground station.</description>
+      <field type="float" name="x">Normalized top left corner X coordinate</field>
+      <field type="float" name="y">Normalized top left corner Y coordinate</field>
+      <field type="float" name="width">Normalized width of the region</field>
+      <field type="float" name="height">Normalized height of the region</field>
+      <field type="uint64_t" name="timestamp">Timestamp</field>
+  </messages>
   </messages>
 </mavlink>
 
