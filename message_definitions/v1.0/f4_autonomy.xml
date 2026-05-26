@@ -170,18 +170,6 @@
         <param index="6">Empty</param>
         <param index="7">Empty</param>
       </entry>
-
-      <entry value="62715" name="MAV_CMD_DO_REGION_ZOOM" hasLocation="false" isDestination="false">
-        <description>Zoom to region.</description>
-        <param index="1" label="x">Normalized top left corner X coordinate</param>
-        <param index="2" label="y">Normalized top left corner Y coordinate</param>
-        <param index="3" label="width">Normalized width of the region</param>
-        <param index="4" label="height">Normalized height of the region</param>
-        <param index="5" label="timestamp">Timestamp</param>
-        <param index="6">Empty</param>
-        <param index="7">Empty</param>
-      </entry>
-
     </enum>
   </enums>
 
