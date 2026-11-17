@@ -181,7 +181,6 @@
         <param index="6">Empty</param>
         <param index="7">Empty</param>
       </entry>
-
     </enum>
   </enums>
 
@@ -216,6 +215,11 @@
       <field type="float" name="y">Normalized center Y coordinate.</field>
       <field type="float" name="w">Normalized width.</field>
       <field type="float" name="h">Normalized height.</field>
+    </message>
+    <message id="62954" name="F4_REWIND">
+      <description>Control message for rewind tool.</description>
+      <field type="uint8_t" name="ctrl_mask">Control bitmask. bits: 1 - enable rewind, 2 - pause, 3 - set time.</field>
+      <field type="uint64_t" name="time">Time to set if ctrl_mask 0x101.</field> 
     </message>
   </messages>
 </mavlink>
