@@ -93,6 +93,12 @@
         <description>Hunt mode. Detection enabled, auto-triggers F4NAV_CONTROL on controller.</description>
       </entry>
     </enum>
+    <enum name="F4_REPLAY_OP_TYPE">
+      <description>Type of replay option</description>
+      <entry value="1" name="ENABLE">
+      <entry value="2" name="PAUSE">
+      <entry value="3" name="SEEK">
+    </enum>
     <enum name="MAV_CMD">
       <entry value="62708" name="MAV_CMD_START_TRACKING_F4" hasLocation="false" isDestination="false">
         <description>Start tracking object</description>
@@ -181,6 +187,17 @@
         <param index="6">Empty</param>
         <param index="7">Empty</param>
       </entry>
+
+      <entry value="62715" name="MAV_CMD_REPLAY_CONTROL" hasLocation="false" isDestination="false">
+        <description>Control Rewind tool</description>
+        <param index="1" label="" enum="F4_REPLAY_OP_TYPE">Reply option to set</param>
+        <param index="2" label="Field 1">Used to set boolean or ts_low</param>
+        <param index="3" label="Field 2">Used to set ts_hi</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
     </enum>
   </enums>
 
@@ -215,11 +232,6 @@
       <field type="float" name="y">Normalized center Y coordinate.</field>
       <field type="float" name="w">Normalized width.</field>
       <field type="float" name="h">Normalized height.</field>
-    </message>
-    <message id="62954" name="F4_REWIND">
-      <description>Control message for rewind tool.</description>
-      <field type="uint8_t" name="ctrl_mask">Control bitmask. bits: 1 - enable rewind, 2 - pause, 3 - set time.</field>
-      <field type="uint64_t" name="time">Time to set if ctrl_mask 0x101.</field> 
     </message>
   </messages>
 </mavlink>
