@@ -194,7 +194,7 @@
         <param index="7">Empty</param>
       </entry>
 
-      <entry value="62715" name="MAV_CMD_REPLAY_CONTROL" hasLocation="false" isDestination="false">
+      <entry value="62716" name="MAV_CMD_REPLAY_CONTROL" hasLocation="false" isDestination="false">
         <description>Control Rewind tool</description>
         <param index="1" label="" enum="F4_REPLAY_OP_TYPE">Reply option to set</param>
         <param index="2" label="Field 1">Used to set boolean or ts_low</param>
