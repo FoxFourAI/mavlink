@@ -96,8 +96,14 @@
     <enum name="F4_REPLAY_OP_TYPE">
       <description>Type of replay option</description>
       <entry value="1" name="ENABLE">
+        <description>Enable or disable replay from file.</description>
+      </entry>
       <entry value="2" name="PAUSE">
+        <description>Pause the repaly.</description>
+      </entry>
       <entry value="3" name="SEEK">
+        <description>Seek the timecode(timestamp) in the replay.</description>
+      </entry>
     </enum>
     <enum name="MAV_CMD">
       <entry value="62708" name="MAV_CMD_START_TRACKING_F4" hasLocation="false" isDestination="false">
