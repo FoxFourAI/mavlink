@@ -239,6 +239,14 @@
       <field type="float" name="w">Normalized width.</field>
       <field type="float" name="h">Normalized height.</field>
     </message>
+    <message id="62954" name="F4_CAM_CALIBR">
+      <description>Camera infromration, includeing calibration.</description>
+      <field type="uint32_t" name="width">Width fo the camera device</field>
+      <field type="uint32_t" name="height">Height fo the camera device</field>
+      <field type="uint8_t[50]" name="distortion_model">Distortion camera model</field>
+      <field type="float[4]" name="K">intrinsic camera matrix K</field>
+      <field type="float[6]" name="D">intrinsic camera matrix D</field>
+    </message>
   </messages>
 </mavlink>
 
