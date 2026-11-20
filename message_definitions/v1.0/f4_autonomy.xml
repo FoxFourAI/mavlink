@@ -243,7 +243,7 @@
       <description>Camera calibration</description>
       <field type="uint32_t" name="width">Width fo the camera device</field>
       <field type="uint32_t" name="height">Height fo the camera device</field>
-      <field type="uint8_t[50]" name="distortion_model">Distortion camera model</field>
+      <field type="int8_t[50]" name="distortion_model">Distortion camera model</field>
       <field type="double[4]" name="K">intrinsic camera matrix K</field>
       <field type="double[6]" name="D">intrinsic camera matrix D</field>
     </message>
