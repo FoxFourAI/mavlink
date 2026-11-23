@@ -87,7 +87,7 @@
   -->
   <!-- FoxFour Autonomy MAVLink dialect -->
   <!-- Message ID range: 62708 - 63000 -->
-  <include>f4_autonomy.xml</include>
+  <!-- <include>f4_autonomy.xml</include> -->
 
   <enums>
     <!-- The MAV_CMD enum entries describe either: -->

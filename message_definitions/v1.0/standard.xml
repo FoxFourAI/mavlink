@@ -2,6 +2,7 @@
 <mavlink>
   <!-- MAVLink standard messages -->
   <include>minimal.xml</include>
+  <include>f4_autonomy.xml</include>
   <dialect>0</dialect>
   <enums>
     <enum name="MAV_BOOL">
